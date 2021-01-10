@@ -1,164 +1,17 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl-PL">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>podstawy</title>
-  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Test article</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='main.js'></script>
 </head>
-
-<body class="stackedit">
-  <div class="stackedit__left">
-    <div class="stackedit__toc">
-      
-<ul>
-<li><a href="#git---podstawy">GIT - podstawy</a>
-<ul>
-<li><a href="#co-to-jest">Co to jest?</a></li>
-<li><a href="#instalacja-i-konfiguracja">Instalacja i konfiguracja</a></li>
-<li><a href="#pierwsze-repozytorium">Pierwsze repozytorium</a></li>
-<li><a href="#zatwierdzanie-zmian">Zatwierdzanie zmian</a></li>
-<li><a href="#zdalne-repozytorium-i-przekazywanie-informacji">Zdalne repozytorium i przekazywanie informacji</a></li>
-</ul>
-</li>
-</ul>
-
-    </div>
-  </div>
-  <div class="stackedit__right">
-    <div class="stackedit__html">
-      <h1 id="git---podstawy">GIT - podstawy</h1>
-<h2 id="co-to-jest">Co to jest?</h2>
-<p>Jest to kontener zawierające dane na temat zmian, jakie zaszły w naszym projekcie (kto je wprowadził, kiedy, czego się tyczyły) oraz także informacje o teraźniejszym stanie naszego projektu, które możemy w każdej chwili pobrać na swoją lokalną maszynę. <strong>Git</strong> umożliwia nam także cofanie się do zmian oraz przywracanie ich. Dane o tworzonym przez nas projekcie przechowywane są, w tak zwanym repozytorium.<br>
-Repozytorium możemy podzielić na 2 części:</p>
-<ul>
-<li>Repozytorium lokalne (local) → to, które znajduje się na naszym komputerze</li>
-<li>Repozytorium zdalne (remote) → jest to repozytorium znajdujące się na serwerach, chmurach lub serwisach takich jak <code>GitHub</code>, <code>GitLab</code> czy <code>BitBucket</code></li>
-</ul>
-<h2 id="instalacja-i-konfiguracja">Instalacja i konfiguracja</h2>
-<h3 id="instalacja">Instalacja</h3>
-<p>Aby zainstalować <code>git</code> na naszym komputerze, to w zależności od systemu operacyjnego, powinniśmy wykonać odpowiednie kroki</p>
-<h4 id="linux">Linux</h4>
-<ol>
-<li>Otwórz terminal</li>
-<li>Wpisz następującą komendę <code>sudo apt-install git</code>. Powinna ona zainstalować <code>git</code> na Twoim komputerze</li>
-<li>Wpisz następującą komendę <code>git --version</code>. Jeżeli na ekranie pojawił się napis z wersją gita proces instalacji przebiegł pomyślnie</li>
-</ol>
-<h4 id="windows">Windows</h4>
-<ol>
-<li>Pobierz <code>git</code> z tej strony <a href="https://git-scm.com/download/win?fbclid=IwAR1X64gPeNxci3sdriltLZAQ5ir9EkD7tN2lqIBYX45fysV-tXzYJPfg4ag">Downloading Git</a></li>
-<li>Zainstaluj <code>git</code>, korzystając z pobranego pliku (wybierz ustawienia rekomendowane)</li>
-<li>W wyszukiwarce Windows wyszukaj <code>Git bash</code> i odpal go</li>
-<li>W odpalonej konsoli wpisz polecenie <code>git --version</code> i sprawdź, czy zwróciła wersje <code>git</code> jeżeli tak to proces instalacji przebiegł pomyślnie</li>
-</ol>
-<h3 id="konfiguracja">Konfiguracja</h3>
-<p>Po instalacji <code>git</code>  należy go skonfigurować, zanim zacznie się z niego korzystać. Jednymi z opcj, które można skonfigurować to: nazwy użytkownika, email, edytora tekstu, kolorowania składni itd. . Najważniejsze są jednak ustawienia <code>username</code> oraz <code>emial</code> ponieważ bez nich nie można przekazać zmiany do zdalnego repozytorium. Aby skonfigurować, ustawienia globalne należy dodać flagę <code>--gloabl</code> a jeżeli konfiguracja ma dotyczyć tylko jednego konkretnego repozytorium, to nie dodajemy flagi.<br>
-Globalna konfiguracja <code>email</code> i <code>username</code>:</p>
-<pre><code>git config --global usr.name [your.sername]
-git config --global user.email [your.email]
-</code></pre>
-<blockquote>
-<p>Jeżeli korzystasz z windowsa powyższe komendy wpisz w aplikajci <code>Git bash</code>, która powinna znajdować się na Twoim komputerze. Od tego mementu zamiast pisać <code>Git bash</code> będę uzywał sformułowania <strong>terminal</strong></p>
-</blockquote>
-<p>Aby sprawdzić swoją konfigurację, wpisz do terminala polecenie <code>git config --list</code>. Jeżeli bezbłędnie przepisałeś powyższe komendy powinieś zobaczyć takie informacje:</p>
-<pre><code>user.name=yourUserName
-user.email=your.email@domain.comm
-</code></pre>
-<h2 id="pierwsze-repozytorium">Pierwsze repozytorium</h2>
-<p>Aby powołać <code>git</code> do życia w naszym projekcie, należy wpisać w terminalu znajdując się w katalogu, który chcemy śledzić polecenie:</p>
-<pre><code>git init
-</code></pre>
-<p>Polecenie to wygeneruje plik <code>.git</code> oraz zacznie śledzić projekt i zapisywać informacje o kolejnych zmianach, które zaszły plikach od ostatniego commita (zapisanej zmiany).<br>
-Aby sprawdzić informacje na temat projektu oraz plików, które zawierają się w repozytorium, należy wpisać polecenie:</p>
-<pre><code>git status
-</code></pre>
-<p>Komenda ta będzie informowała o statusie zmian, które zaszły w konkretnych plikach<br>
-Od razu po incjalizacji <code>git</code> po wpisaniu komendy <code>git status</code> w terminalu powinno pojawić się:</p>
-<pre><code>On branch master
-No commits yet
-nothing to commit (create/copy files and use "git add" to track)
-</code></pre>
-<p>W takim razie dodajmy nowy plik do naszego katalogu i wpiszemy komendę <code>git status</code> w terminalu. Komenda powinna wyświetlić informację, że plik, który dodaliśmy jest w stanie <strong>untrack</strong> i jest zaznaczony na czerwony kolor:</p>
-<pre><code>Untracked files:
-  (use "git add &lt;file&gt;..." to include in what will be committed)
-	test.txt
-</code></pre>
-<p>Następnie wpiszemy komendę:</p>
-<ul>
-<li><strong><code>git add file/name/to.add</code></strong> -&gt; dodaje jeden konkretny plik</li>
-<li><strong><code>git add .</code></strong> -&gt; dodaje wszystkie pliki, które są śledzone i wykryto w nich zmiany lub są nowymi plikami</li>
-</ul>
-<p>Ponowne wpisanie komendy <code>git status</code> powinno podświetlić nowo dodany plik na kolor zielony i przenieść go do sekcji <strong>Changes to be committed</strong>:</p>
-<pre><code>Changes to be committed:
-  (use "git rm --cached &lt;file&gt;..." to unstage)
-	new file:   test.txt
-</code></pre>
-<p>Następnie można zmodyfikować dodany plik i  kolejny raz wpisać komendę <code>git status</code>. Komenda powinna wyświetlić informację, że plik znajduje się w 2 sekcjach: <strong>Changes to be committed</strong>, <strong>Changes not staged for commit</strong>.</p>
-<pre><code>Changes to be committed:
-  (use "git rm --cached &lt;file&gt;..." to unstage)
-	new file:   test.txt
-
-Changes not staged for commit:
-  (use "git add &lt;file&gt;..." to update what will be committed)
-  (use "git restore &lt;file&gt;..." to discard changes in working directory)
-	modified:   test.txt
-</code></pre>
-<p>W sekcji <strong>not staged for commit</strong>, plik ma stan <strong>modyfied</strong> co mówi o tym, że jest on zmodyfikowany. Aby uwzględnić wprowadzone w nim zmiany, w zapisie stanu, należy go ponownie dodać przy pomocy komendy <code>git add file.name</code>.  Po wpisaniu tej komendy i ponownym wpisaniu <code>git status</code> powinniśmy widzieć tylko jedną sekcję z nowym zmodyfikowanym plikiem:</p>
-<pre><code>Changes to be committed:
-  (use "git rm --cached &lt;file&gt;..." to unstage)
-	new file:   test.txt
-</code></pre>
-<p>Teraz usuńmy zmodyfikowany plik i ponownie wpiszmy komendę <code>git status</code>. Komenda powinna wyświetlić informację, że plik znajduje się w 2 sekcjach: <strong>Changes to be committed</strong>, <strong>Changes not staged for commit</strong>.</p>
-<pre><code>Changes to be committed:
-  (use "git rm --cached &lt;file&gt;..." to unstage)
-	new file:   test.txt
-
-Changes not staged for commit:
-  (use "git add/rm &lt;file&gt;..." to update what will be committed)
-  (use "git restore &lt;file&gt;..." to discard changes in working directory)
-	deleted:    test.txt
-</code></pre>
-<p>W sekcji <strong>not staged for commit</strong>, plik ma stan <strong>deleted</strong> co mówi o tym, że został on usunięty. Aby uwzględnić to, że został usunięty, w zapisie stanu, należy go ponownie dodać przy pomocy komendy <code>git add file.name</code>.  Po wpisaniu tej komendy i ponownym wpisaniu <code>git status</code> nie powinniśmy zobaczyć żadnego pliku, ponieważ od inicjalizacji nic się nie zmieniło (dodaliśmy plik, który potem usnęliśmy, więc koniec końców nie zaszła żadna zmiana):</p>
-<pre><code>On branch master
-No commits yet
-nothing to commit (create/copy files and use "git add" to track)
-</code></pre>
-<h3 id="statusy">Statusy</h3>
-<ul>
-<li><strong><code>untracked</code></strong> → jest to status, który mówi o tym, że <code>git</code> zauważył zmianę w katalogu, ale nie śledzi tego pliku i nie obserwuje zmian strukturalnych wewnątrz niego</li>
-<li><strong><code>new file</code></strong> → status ten informuje nas o tym, że plik jest nowy i dopiero co został dodany do repozytorium</li>
-<li><strong><code>modified</code></strong> → status ten mówi nam o tym, że w pliku, który jest śledzony zaszły zmiany</li>
-<li><strong><code>deleted</code></strong> →  jest to status, który mówi o tym, że plik ten był wcześniej w repozytorium, ale został usnięty</li>
-<li><strong><code>renamed</code></strong> → status ten określa plik, który wcześniej istniał w repozytorium, lecz zmieniono mu nazwę</li>
-</ul>
-<h2 id="zatwierdzanie-zmian">Zatwierdzanie zmian</h2>
-<p>Aby zatwierdzić zmiany w repozytorium, dla plików znajdujących się w sekcji <strong>Changes to be committed</strong> można posłużyć się następującymi komendami:</p>
-<ul>
-<li><strong><code>git commit</code></strong> → zatwierdza zmiany oraz wyświetla okno, w którym można dodać informacje na temat commita (nazwę, opis)</li>
-<li><strong><code>git commit -m "commit changes description"</code></strong> → zatwierdza zmiany w śledzonych plikach i automatycznie dodaje nazwę do zatwierdzonego stanu</li>
-</ul>
-<h2 id="zdalne-repozytorium-i-przekazywanie-informacji">Zdalne repozytorium i przekazywanie informacji</h2>
-<h3 id="zdalne-repozytorium">Zdalne repozytorium</h3>
-<p>Jeżeli chcemy przechowywać informacje dotyczące projektu nie tylko u nas na komputerze, ale też gdzieś w sieci tak, aby można udostępnić projekt innym osobom, to możemy założyć konto na platformach do tego przeznaczonych takich jak <code>GitHub</code> lub <code>GitLab</code> itp…<br>
-Aby połączyć lokalne repozytorium ze zdalnym, należy skorzystać z komendy:</p>
-<ul>
-<li><strong><code>git remote add git@cloud.name:username/repo-name</code></strong> → komenda ta ustawi miejsce, na które będziemy przekazywać zmiany z lokalnego repozytorium</li>
-</ul>
-<h3 id="przekazywanie-informacji">Przekazywanie informacji</h3>
-<ul>
-<li><strong><code>git push</code></strong> → komenda ta wypchnie zmiany, które wprowadziliśmy na lokalny repozytorium na repozytorium zdalne. Do komendy <code>push</code> możemy dodać flagi takie jak:
-<ul>
-<li><strong><code>u origin branchName</code></strong> → jest to flaga, z której korzysta się za pierwszym razem, aby wskazać miejsce na zdalnego repozytorium, na które mają trafiać informacje z repozytorium lokalnego</li>
-</ul>
-</li>
-<li><strong><code>git fetch</code></strong> → aktualizuje informacje na temat zdalnego repozytorium</li>
-<li><strong><code>git pull</code></strong> → pobiera informacje ze zdalnego repozytorium i aktualizuje o nie informacje w lokalnym repozytorium</li>
-<li><strong><code>git clone https://cloud.name/repo-name</code></strong> → pobiera zdalne repozytorium na nasz komputer</li>
-</ul>
-
-    </div>
-  </div>
+<body>
+    <h1>Lista materiałów</h1>
+    <ul>
+        <li><a href="git-basics.html">Podstawy git'a</a></li>
+        <li><a href="css-selctors.html">Selektry css</a></li>
+    </ul>
 </body>
-
 </html>

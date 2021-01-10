@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>specyficznosc-i-selektory.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css"/>
+</head>
+
+<body class="stackedit">
+<div class="stackedit__left">
+  <div class="stackedit__toc">
+
+    <ul>
+      <li><a href="#selektory-i-specyficzność">Selektory i specyficzność</a>
+        <ul>
+          <li><a href="#selektory">Selektory</a></li>
+          <li><a href="#specyficzności">Specyficzności</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="stackedit__right">
+  <div class="stackedit__html">
+    <h1 id="selektory-i-specyficzność">Selektory i specyficzność</h1>
+    <h2 id="selektory">Selektory</h2>
+    <p>Selektor to reguła, która mówi przeglądarce, jakie elementy drzewa DOM aplikacji webowej powinna zaznaczyć.</p>
+    <ul>
+      <li>
+        <p><em><strong><code>*</code></strong></em> → zaznacza wszystkie elementy drzewa DOM aplikacji webowej.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ * {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul style="color: red;">
+            <li>I am red</li>
+            <li>I am red</li>
+            <li>I am red</li>
+          </ul>
+        </details>
+
+      </li>
+      <li>
+        <p><em><strong><code>li</code></strong></em> → zaznacza wszystkie zdefiniowane elementy np.: <strong>li</strong>
+        </p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ li {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;p&gt;I am NOT red&lt;/p&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul style="color: red;">
+            <li>I am red</li>
+            <li>I am red</li>
+            <li>I am red</li>
+          </ul>
+          <p>I am NOT red</p>
+        </details>
+
+      </li>
+      <li>
+        <p><strong><code>.className</code></strong> → zaznacza wszystkie elementy o zdefiniowanej nazwie klasy</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ .list--item__middle-item {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li&gt;I am NOT red&lt;/li&gt;
+     &lt;li class="list--item__middle-item"&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am NOT red&lt;/li&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul>
+            <li>I am NOT red</li>
+            <li style="color: red;">I am red</li>
+            <li>I am NOT red</li>
+          </ul>
+        </details>
+
+      </li>
+      <li>
+        <p><strong><code>#id</code></strong> → zaznacza element o zdefiniowanym id</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ #unique-lit-item {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li id="unique-lit-item"&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am NOT red&lt;/li&gt;
+     &lt;li&gt;I am NOT red&lt;/li&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul>
+            <li style="color: red;">I am red</li>
+            <li>I am NOT red</li>
+            <li>I am NOT red</li>
+          </ul>
+        </details>
+
+      </li>
+      <li>
+        <p><strong><code>[attr="value"]</code></strong> → zaznacza wszystkie elementy zawierające zdefiniowany atrybut o
+          zdefiniowanej wartości. Aby zaznaczyć grupę atrybutów, możemy skorzystać z wyrażeń regularnych np.:
+          <strong><code>[href$=".com"]</code></strong>, zaznaczy wszystkie elementy z atrybutem <strong>href</strong>
+          kończącym się na <em>.com</em>.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ [href$=".com"] {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li&gt;&lt;a href="test.org"&gt;I am NOT red&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href="test.com"&gt;I am red&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href="test.com"&gt;I am red&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul>
+            <li><a href="test.org">I am red</a></li>
+            <li><a href="test.com" style="color: red;">I am red</a></li>
+            <li><a href="test.com" style="color: red;">I am red</a></li>
+          </ul>
+        </details>
+
+      </li>
+      <li>
+        <p><strong><code>h1 + p</code></strong> → musi być umieszczony pomiędzy dwoma selektorami. Zaznaczy pierwszy
+          element na tym samym poziomie hierarchii co element zaznaczony przez pierwszy selektor, który występuje zaraz
+          PO tym elemencie.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ h1 + p {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;article&gt;
+     &lt;p&gt;I am NOT red&lt;/p&gt;
+     &lt;strong&gt;Reference element&lt;/strong&gt;
+     &lt;p&gt;I am red&lt;/p&gt;
+ &lt;/article&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <article>
+            <p>I am NOT red</p>
+            <strong>Reference element</strong>
+            <p style="color: red;">I am red</p>
+          </article>
+        </details>
+      </li>
+      <li>
+        <p><strong><code>h1 ~ p</code></strong> → musi być umieszczony pomiędzy dwoma selektorami. Zaznaczy wszystkie
+          elementy na tym samym poziomie hierarchii co element zaznaczony przez pierwszy selektor, które występują po
+          tym elemencie.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ h1 ~ p {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;article&gt;
+     &lt;p&gt;I am NOT red&lt;/p&gt;
+     &lt;strong&gt;Reference element&lt;/strong&gt;
+     &lt;p&gt;I am red&lt;/p&gt;
+     &lt;div&gt;I am NOT red&lt;/div&gt;
+     &lt;p&gt;I am red&lt;/p&gt;
+ &lt;/article&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <article>
+            <p>I am NOT red</p>
+            <strong>Reference element</strong>
+            <p style="color: red;">I am red</p>
+            <div>I am NOT red</div>
+            <p style="color: red;">I am red</p>
+          </article>
+        </details>
+      </li>
+      <li>
+        <p><strong><code>ul &gt; li</code></strong> → musi być umieszczony pomiędzy dwoma selektorami. Zaznaczy
+          wszystkie elementy, które są BEZPOŚREDNIMI dziećmi elementu zaznaczonego przez pierwszy selektor.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ ul &gt; li {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;li&gt;I am red&lt;/li&gt;
+     &lt;ul&gt;
+         &lt;li&gt;I am NOT red&lt;/li&gt;
+         &lt;li&gt;I am NOT red&lt;/li&gt;
+         &lt;li&gt;I am NOT red&lt;/li&gt;
+     &lt;/ul&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul>
+            <li style="color: red;">I am red</li>
+            <li style="color: red;">I am red</li>
+            <li style="color: red;">I am red</li>
+            <ul>
+              <li>I am NOT red</li>
+              <li>I am NOT red</li>
+              <li>I am NOT red</li>
+            </ul>
+          </ul>
+        </details>
+
+      </li>
+      <li>
+        <p><strong><code>ul.className li</code></strong> → zaznacza elementy, które wyznaczają zadeklarowaną ścieżkę
+          hierarchii pośrednio, lub bezpośrednio.</p>
+
+        <details>
+          <summary><b>Przykład></b></summary>
+          <pre><code> **Kod css:**
+ ```css
+ ul.list-item em {
+     colore: red;
+ }
+ ```
+ **Kod html:**
+ ```html
+ &lt;ul&gt;
+     &lt;li class="list-item"&gt;I am NOT red&lt;/li&gt;
+     &lt;li class="list-item"&gt;I am NOT red&lt;/li&gt;
+     &lt;li class="list-item"&gt;&lt;em&gt;I am red&lt;/em&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ ```
+</code></pre>
+          <b>Wynik</b>
+          <ul>
+            <li>I am red</li>
+            <li>I am red</li>
+            <li><em style="color: red;">I am red</em></li>
+          </ul>
+        </details>
+
+      </li>
+    </ul>
+    <h2 id="specyficzności">Specyficzności</h2>
+    <p>Jest to ważność naszej reguły względem innych reguł. Moc reguły można policzyć na podstawie zastosowanych
+      selektorów np.:</p>
+    <ol>
+      <li><em><strong><code>#user-name.experience li</code></strong></em> → będzie miał moc równą 111</li>
+      <li><em><strong><code>ul li</code></strong></em> → będzie miał moc 2</li>
+    </ol>
+    <p>Wynika z tego, że selektor <strong>1</strong> nadpisze swoimi stylami style z selektora <strong>2</strong>,
+      ponieważ jest on ważniejszy.</p>
+    <p>Każdy style mogą zostać nadpisane przez klauzule <strong>!important</strong>, lecz nie zaleca się stosowania tej
+      klauzuli, ponieważ może być ona nadpisana inną klauzulą <strong>!important</strong> o większej specyficzności.</p>
+    <p>Na specyficzność ma też wpływ, w jakiej kolejności ustawione są nazwy klas w atrybiecie <em>class</em> nadanym na
+      element <strong>HTML</strong>. Każdy kolejny selektor ma większą specyficzność niż poprzedni jeżeli przyjmiemy, że
+      wszystkie selektory zawarte w atrybucie <em>class</em> mają te samą specyficzność.</p>
+    <p><strong>Moc specificzności selektorów opisuje poniższa tabelka:</strong></p>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Selektory</th>
+        <th>Moc</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>h1, [attribute=“value”], :pseudo-class, ::pseudo-element</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>.class</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>#id</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>inline style</td>
+        <td>1000</td>
+      </tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>Selektory: <em><strong><code>*</code>, <code>+</code>, <code>~</code>, <code>&gt;</code></strong></em> oraz
+        pseudo klasa <em><strong><code>:not</code></strong></em> nie mają wpływu na specyficzność całego wyrażenia
+        selektora</p>
+    </blockquote>
+    <h3 id="warto-wiedzieć">Warto wiedzieć</h3>
+    <p>Do stylowania elementów nie powinno używać się id’ków (<code>#</code>), ponieważ ten selektor ma bardzo dużą moc
+      i aby nadpisać style dla elementów zawartych w elemencie ostylowanym id’ikmie należałoby użyć co najmniej 10 klas,
+      lub kolejnego id co czyni nasz kod css nieutrzymywalnym</p>
+
+  </div>
+</div>
+</body>
+
+</html>
